@@ -35,39 +35,39 @@
         >
 
         <Button
-            android:id="@+id/btn1"
+            android:id="@+id/btn00"
             android:layout_width="64dp"
             android:layout_height="64dp"/>
         <Button
-            android:id="@+id/btn2"
+            android:id="@+id/btn01"
             android:layout_width="64dp"
             android:layout_height="64dp"/>
         <Button
-            android:id="@+id/btn3"
+            android:id="@+id/btn02"
             android:layout_width="64dp"
             android:layout_height="64dp"/>
         <Button
-            android:id="@+id/btn4"
+            android:id="@+id/btn10"
             android:layout_width="64dp"
             android:layout_height="64dp"/>
         <Button
-            android:id="@+id/btn5"
+            android:id="@+id/btn11"
             android:layout_width="64dp"
             android:layout_height="64dp"/>
         <Button
-            android:id="@+id/btn6"
+            android:id="@+id/btn12"
             android:layout_width="64dp"
             android:layout_height="64dp"/>
         <Button
-            android:id="@+id/btn7"
+            android:id="@+id/btn20"
             android:layout_width="64dp"
             android:layout_height="64dp"/>
         <Button
-            android:id="@+id/btn8"
+            android:id="@+id/btn21"
             android:layout_width="64dp"
             android:layout_height="64dp"/>
         <Button
-            android:id="@+id/btn9"
+            android:id="@+id/btn22"
             android:layout_width="64dp"
             android:layout_height="64dp"/>
 
