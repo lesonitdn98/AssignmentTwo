@@ -292,7 +292,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 round += 1;
             }
 
-            if (!endGame){
+            if (!endGame) {
                 startComputer();
                 checkStateGame();
             }
