@@ -12,6 +12,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     private Button[][] mButtons = new Button[3][3];
     private boolean mPlayer;
     private int diem = 0;
+    private int round = 0;
+    private String[][] play = new String[3][3];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 int resID = getResources().getIdentifier(buttonID, "id", getPackageName());
                 mButtons[i][j] = findViewById(resID);
                 mButtons[i][j].setOnClickListener(this);
+                play[i][j] = "";
             }
         }
         Button newGame = findViewById(R.id.newGame);
@@ -42,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 game[i][j] = mButtons[i][j].getText().toString();
-                if (!game[i][j].equals("")){
+                if (!game[i][j].equals("")) {
                     dem -= 1;
                 }
             }
@@ -65,27 +68,104 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
         if (diem == 1) {
             Toast.makeText(this, "X Win", Toast.LENGTH_LONG).show();
-            restartGame();
+            mPlayer = false;
         } else {
             if (diem == -1) {
                 Toast.makeText(this, "O Win", Toast.LENGTH_LONG).show();
-                restartGame();
+                mPlayer = false;
             }
         }
 
-        if (dem == 0 && diem == 0){
+        if (dem == 0 && diem == 0) {
             Toast.makeText(this, "Hoà", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void restartGame() {
         diem = 0;
+        round = 0;
         mPlayer = true;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 mButtons[i][j].setText("");
+                play[i][j] = "";
             }
         }
+    }
+
+    private void startComputer() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (!play[i][j].equals(mButtons[i][j].getText().toString())) {
+                    play[i][j] = mButtons[i][j].getText().toString();
+                    if (round == 0) {
+                        if (i == 1 && j == 1) {
+                            play[0][0] = "O";
+                            mButtons[0][0].setText(play[0][0]);
+                        } else {
+                            if ((i == 0 && j == 0) || (i == 0 && j == 2) || (i == 2 && j == 0) || (i
+                                    == 2 && j == 2)) {
+                                play[1][1] = "O";
+                                mButtons[1][1].setText(play[1][1]);
+                            } else {
+                                if (i == 1) {
+                                    if (j == 0) {
+                                        play[1][2] = "O";
+                                        mButtons[1][2].setText(play[1][2]);
+                                    } else {
+                                        play[1][0] = "O";
+                                        mButtons[1][0].setText(play[1][0]);
+                                    }
+                                } else {
+                                    if (i == 0) {
+                                        play[2][1] = "O";
+                                        mButtons[2][1].setText(play[2][1]);
+                                    } else {
+                                        play[0][1] = "O";
+                                        mButtons[0][1].setText(play[0][1]);
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+
+                        if (play[i][j].equals(play[1][j])) {
+                            if (play[2][j].equals("")) {
+                                play[2][j] = "O";
+                                mButtons[2][j].setText(play[2][j]);
+                                break;
+                            }
+                        } else {
+                            if (play[i][j].equals(play[2][j])) {
+                                if (play[1][j].equals("")) {
+                                    play[1][j] = "O";
+                                    mButtons[1][j].setText(play[1][j]);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    if (play[i][j].equals(play[i][1])) {
+                        if (play[i][2].equals("")) {
+                            play[i][2] = "O";
+                            mButtons[i][2].setText(play[i][2]);
+                            break;
+                        }
+                    } else {
+                        if (play[i][j].equals(play[i][2])) {
+                            if (play[i][1].equals("")) {
+                                play[i][1] = "O";
+                                mButtons[i][1].setText(play[i][1]);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        mPlayer = true;
     }
 
     @Override
@@ -97,13 +177,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 return;
             }
         } else {
-
             if (mPlayer) {
                 ((Button) v).setText("X");
                 mPlayer = false;
-            } else {
-                ((Button) v).setText("O");
-                mPlayer = true;
+                startComputer();
+                round += 1;
             }
         }
         checkStateGame();
