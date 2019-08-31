@@ -260,6 +260,49 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         boolean check = false;
 
         if (myComputer) {
+            if (play[0][0].equals("X") && play[1][1].equals("X") && play[2][2].equals("")) {
+                play[2][2] = "O";
+                mButtons[2][2].setText(play[2][2]);
+                myComputer = false;
+            } else {
+                if (play[0][0].equals("") && play[1][1].equals("X") && play[2][2].equals("X")) {
+                    play[0][0] = "O";
+                    mButtons[0][0].setText(play[0][0]);
+                    myComputer = false;
+                } else {
+                    if (play[0][0].equals("X") && play[1][1].equals("") && play[2][2].equals("X")) {
+                        play[1][1] = "O";
+                        mButtons[1][1].setText(play[1][1]);
+                        myComputer = false;
+                    } else {
+                        if (play[0][2].equals("X") && play[1][1].equals("X") && play[2][0].equals(
+                                "")) {
+                            play[2][0] = "O";
+                            mButtons[2][0].setText(play[2][0]);
+                            myComputer = false;
+                        } else {
+                            if (play[0][2].equals("")
+                                    && play[1][1].equals("X")
+                                    && play[2][0].equals("X")) {
+                                play[0][2] = "O";
+                                mButtons[0][2].setText(play[0][2]);
+                                myComputer = false;
+                            } else {
+                                if (play[0][2].equals("X")
+                                        && play[1][1].equals("")
+                                        && play[2][0].equals("X")) {
+                                    play[1][1] = "O";
+                                    mButtons[1][1].setText(play[1][1]);
+                                    myComputer = false;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if (myComputer) {
             for (int i = 0; i < 3; i++) {
                 for (int j = 0; j < 3; j++) {
                     if (mButtons[i][j].getText().toString().equals("")) {
